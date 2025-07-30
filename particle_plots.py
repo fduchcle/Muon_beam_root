@@ -2,6 +2,7 @@ from ROOT import (RDataFrame, EnableImplicitMT, TFile, TLegend, gPad, TCanvas, g
 from ROOT import kBlue, kYellow, kRed
 from math import acos
 from sys import exit
+import sys
 import re
 
 gROOT.SetBatch(True)
@@ -72,7 +73,21 @@ def display_plots(hists):
     p21.SetLogy()
 
 
-datafile = "Pipe_4.56in_Simulation.root"
+if __name__ == "__main__":
+
+    try:
+        datafile  = sys.argv[1]
+    except IndexError:
+        print('WARNING: arguments are missing')
+        print('USAGE: python3 %s <imput_file>' % (sys.argv[0].split('/')[-1]) )
+        sys.exit()
+    except IOError or ValueError:
+        print('WARNING: input file missing')
+        print('cannot open file: %s', sys.argv[1])
+        print('USAGE: python3 %s <input_file>' % (sys.argv[0].split('/')[-1]) )
+        sys.exit()
+
+    fin = TFile(datafile, "READ")
 sampling_plane_z = 7400
 sampling_plane_zwindow = 400
 
