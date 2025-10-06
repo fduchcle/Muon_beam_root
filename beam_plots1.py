@@ -1,5 +1,6 @@
-from ROOT import (TFile, TTree, TH1F, TH2F, TH3F, TCanvas, TPad, gDirectory, gStyle, gPad)
+from ROOT import (TFile, TTree, TH1F, TH2F, TH3F, TCanvas, TPad, TLine, gDirectory, gStyle, gPad)
 import sys
+import os
 from math import acos, pi
 
 
@@ -99,8 +100,7 @@ if __name__ == "__main__":
 
     # Add dynamic title
     c1.cd()
-    from ROOT import TPaveText
-    import os
+    
     filename = os.path.splitext(os.path.basename(datafile))[0]
     flabel = filename.replace('_', ' ')
     title_text = f"Muon Beam Analysis: {flabel}"
